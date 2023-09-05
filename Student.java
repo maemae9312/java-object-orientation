@@ -1,4 +1,4 @@
-public class Student {
+class Student {
     // メンバ変数(属性)
     String name;
     int engScore;
@@ -7,7 +7,7 @@ public class Student {
     //メソッド(操作)
     void display() {
         System.out.println(name);
-        System.out.println("English" + engScore + "Math" + mathScore);
+        System.out.println("English: " + engScore + " Math: " + mathScore);
     }
 
     void setScore(int eng, int math) {
