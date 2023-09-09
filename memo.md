@@ -258,3 +258,42 @@ main(~) {
     Student stu2 = new Student("樋口",60,55);
 }
 ```
+
+# static変数、staticメソッド
+- 全インスタンス変数が使えるメンバ変数やメソッドを定義するにはstaticを指定する
+- オブジェクトを生成しなくても利用できる
+```java
+class Student {
+    String name;                // 通常のインスタンス変数
+    static int totalStudents;  // static変数
+
+    Student(String name) {
+        this.name = name;
+        totalStudents++;       // 新しいStudentオブジェクトが生成されるたびに、totalStudentsの値が増加する
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student("Alice");
+        Student s2 = new Student("Bob");
+
+        System.out.println(Student.totalStudents);  // 出力: 2
+    }
+}
+```
+```java
+class MathUtility {
+    static int square(int x) {  // staticメソッド
+        return x * x;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathUtility.square(5);  // インスタンスを生成せずに直接メソッドを呼び出す
+        System.out.println(result);          // 出力: 25
+    }
+}
+
+```
