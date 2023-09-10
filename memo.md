@@ -297,3 +297,66 @@ public class Main {
 }
 
 ```
+
+# カプセル化
+カプセル化とは、オブジェクト指向プログラミングの基本的な概念の一つで、クラスの内部の実装詳細を隠蔽し、外部からの不正なアクセスや変更を防ぐ機能のことを指します。具体的には、クラスの変数やメソッドの可視性を制限することで実現します。
+
+- アクセス修飾子でクラス・メンバ変数・メソッドの公開範囲を指定できる
+    - public
+        - 全てに公開
+    - protected
+        - 同クラス、同パッケージ、サブクラスに公開
+    - private
+        - 同クラスのみに公開
+- メンバ変数は隠蔽(private)して、クラスとメソッドは公開(public)する設計方針をカプセル化と呼ぶ。
+
+### メリット：
+
+1. **安全性**: クラスの内部状態を適切に保護し、不正な値の設定や予期しない方法でのアクセスを防ぐことができます。
+2. **柔軟性**: クラスの内部実装を変更しても、外部のコードに影響を与えることなく変更を加えることができます。
+3. **簡潔さ**: 必要最小限の情報だけを外部に公開することで、クラスの利用方法が明確になり、誤解を避けることができます。
+
+### 具体例：
+
+以下は、銀行の口座を模したシンプルな例です。
+
+```java
+public class BankAccount {
+    private double balance;  // private変数
+
+    public BankAccount(double balance) {
+        if (balance >= 0) {
+            this.balance = balance;
+        } else {
+            this.balance = 0;
+            System.out.println("Initial balance cannot be negative.");
+        }
+    }
+
+    public double getBalance() {  // balanceの値を取得するためのpublicメソッド
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            System.out.println("Cannot deposit negative amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Invalid withdrawal amount.");
+        }
+    }
+}
+```
+
+この例で、`balance` は `private` として定義されているので、`BankAccount` クラスの外部から直接アクセスすることはできません。その代わり、`getBalance()`, `deposit()`, `withdraw()` といったメソッドを提供して、適切な操作を行うようにしています。
+
+このようなカプセル化のアプローチをとることで、口座の残高が不正な値になることを防ぐことができます。例えば、直接のアクセスが許されていれば、誤って負の預金を設定するリスクがありますが、この方法ではそのような事態を防ぐことができます。
+
+未経験のエンジニアに例えるなら、カプセル化は「家の鍵」のようなものです。家の中の貴重品やプライバシーを守るために、家の扉を施錠します。同様に、カプセル化を利用して、プログラムの特定の部分を守ることができます。
